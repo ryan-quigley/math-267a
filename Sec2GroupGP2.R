@@ -7,10 +7,7 @@ getDigit <- function(x, n) {
 		# thus the condition would fail unless the user specifcally casts the value as an integer before or during the function call
 		stop("n has to be a positive integer.", call. = TRUE)
 	} else {
-		a <- (x*(10^n)) %/% 1
-		b <- x*(10^(n-1))
-		c <- (b %/% 1)*10
-		a - c
+		((x*(10^n)) %/% 1) - ((x*(10^(n-1))) %/% 1)*10
 	}	
 }
 

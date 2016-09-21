@@ -1,13 +1,13 @@
 ### 3. ###
-# Do we need to handle the case where n is negative?
-# There are NO negative perfect squares because a perfect square is a number that is the square of an integer
+# Final Code: Ian
 
 squareNumbers <- function(n) {
 	if (!is.numeric(n) || (n %% 10 != 0)) {
-		stop("n must be an integer that is a multiple of 10")
+		stop("n must be an integer that is a multiple of 10.")
+	} else if (n < 0) {
+		stop("there are no negative perfect squares.")
 	}
-	x <- 1:n
-	squares <- x[sqrt(x) %% 1 == 0]
+	squares <- (1:sqrt(n))^2
 	lower.bound <- seq.int(from = 1, to = (n - 9), by = 10)
 	upper.bound <- seq.int(from = 10, to = n, by = 10)
 	names <- paste(lower.bound, " to ", upper.bound, sep = "")

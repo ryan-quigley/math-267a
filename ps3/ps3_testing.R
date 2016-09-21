@@ -21,3 +21,16 @@ r3
 squareNumbers(100)
 r4 <- squareNumbers(100)
 r4
+
+squareNumbers(-10)
+r5 <- squareNumbers(-10)
+r5
+squareNumbers(-20)
+r6 <- squareNumbers(-20)
+r6
+squareNumbers(-60)
+r7 <- squareNumbers(-60)
+r7
+squareNumbers(-100)
+r8 <- squareNumbers(-100)
+r8

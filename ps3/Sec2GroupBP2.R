@@ -1,18 +1,20 @@
 ### 2. ###
-# a) For loop
+# a)
+# Final Code: Ian
 tri.num.20 <- numeric(20)
 for (i in 1:20) tri.num.20[i] <- (i*(i+1))/2
 tri.num.20
 
 
-# b) Vectorized operations
+# b)
+# Final Code: Ian
 tri.num.20 <- (1:20)*((2:21)/2)
 tri.num.20
 
 
-# c) 
+# c)
+# Final Code: Ian
 # ADD COMMENTARY regarding the performance difference
-# RENAME to tri.num
 
 # Check to make sure each method is giving the same result
 tri.num1 <- numeric(100000)
@@ -33,6 +35,7 @@ system.time(tri.num <- (1:100000)*((2:100001)/2))
 
 
 # d)
+# Final Code: Ian
 tri.num.50 <- ((1:50)*(2:51))/2
 l <- c(letters, paste(letters, letters, sep = ""))
 length(l) <- length(tri.num.50)
@@ -40,6 +43,7 @@ names(tri.num.50) <- l
 
 
 # e)
+# Final Code: Ian
 vowels <- c("a", "e", "i", "o", "u")
 double.vowels <- paste(vowels, vowels, sep = "")
 tri.num.50[names(tri.num.50) %in% c(vowels, double.vowels)]

@@ -1,28 +1,26 @@
-### 1. ###
+# Group B problem 1
+# Ian Dupzyk
+# Ryan Quigley
+# Sucharu Gupta
+
 # v1
-# Final Code: Ryan
-v1.0 <- (1:100)
-v1.1 <- c(1,-1)
-v1 <- v1.0 * v1.1
+v1_0 <- (1:100)
+v1_1 <- c(1,-1)
+v1 <- v1_0 * v1_1
 v1
 
 # v2
-# Final Code: Ryan
-v2.0 <- 1:99
-v2.1 <- rep(1:3, times = 33)
-v2 <- rep(v2.0, v2.1)
+v2_0 <- 1:99
+v2_1 <- rep(1:3, times = 33)
+v2 <- rep(v2_0, v2_1)
 v2
 
 # v3
-# Final Code: Ryan
-v3.0 <- 1:100
-v3 <- ifelse(v3.0 %% 3 == 0, cos(v3.0), 1/sqrt(v3.0))
+v3_0 <- 1:100
+v3 <- ifelse(v3_0 %% 3 == 0, cos(v3_0), 1/sqrt(v3_0))
 v3
 
-
-# v4 
-# Final Code: Ian
-v4 <- rep("C", 100)
-v4[v1 > 0] <- "A"
-v4[(v1 < 0) & ((0 < v3) & (v3 < 0.138))] <- "B"
-v4
+# v4
+v4_0 <- rep("C", each=100)
+v4_1 <- replace(v4_0, v1>0, 'A')
+v4 <- replace(v4_1, ((v1<=0) & ((v3 >= 0) & (v3 <= 0.138))), 'B')

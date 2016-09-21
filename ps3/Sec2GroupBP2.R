@@ -1,49 +1,45 @@
-### 2. ###
+# Group B problem 2
+# Ian Dupzyk
+# Ryan Quigley
+# Sucharu Gupta
+
 # a)
-# Final Code: Ian
-tri.num.20 <- numeric(20)
-for (i in 1:20) tri.num.20[i] <- (i*(i+1))/2
-tri.num.20
+tri.num.20 <- as.numeric(c(1:20))
+
+for (i in tri.num.20[2:20]) {
+    tri.num.20[i] <- tri.num.20[i-1]+i
+}
 
 
 # b)
-# Final Code: Ian
-tri.num.20 <- (1:20)*((2:21)/2)
-tri.num.20
+x <- c(1:20)
+tri.num.20 <- x*(x+1)/2
+cat(tri.num.20, fill=TRUE)
 
 
 # c)
-# Final Code: Ian
-# ADD COMMENTARY regarding the performance difference
+N <- 100000
 
-# Check to make sure each method is giving the same result
-tri.num1 <- numeric(100000)
-for (i in 1:100000) tri.num1[i] <- (i*(i+1))/2
-tri.num2 <- numeric(100000)
-tri.num2 <- (1:100000)*((2:100001)/2)
-all(tri.num1 == tri.num2)
+system.time({
+    tri.num <- as.numeric(c(1:N))
 
-# Time the two methods
-tri.num <- numeric(100000)
-system.time(for (i in 1:100000) tri.num[i] <- (i*(i+1))/2)
-#   user  system elapsed 
-#  0.191   0.004   0.204 
-tri.num <- numeric(100000)
-system.time(tri.num <- (1:100000)*((2:100001)/2))
-#   user  system elapsed 
-#  0.001   0.000   0.000 
+    for (i in tri.num[2:length(tri.num)]) {
+        tri.num[i] <- tri.num[i-1]+i
+    }
+})
 
+system.time({
+    x <- c(1:N)
+    tri.num <- x*(x+1)/2
+})
 
 # d)
-# Final Code: Ian
-tri.num.50 <- ((1:50)*(2:51))/2
-l <- c(letters, paste(letters, letters, sep = ""))
-length(l) <- length(tri.num.50)
-names(tri.num.50) <- l
-
+x <- c(1:50)
+tri.num.50 <- x*(x+1)/2
+nm <- unlist(list(letters, paste(letters, letters, sep='')))
+length(nm) <- 50
+names(tri.num.50) <- nm
+tri.num.50
 
 # e)
-# Final Code: Ian
-vowels <- c("a", "e", "i", "o", "u")
-double.vowels <- paste(vowels, vowels, sep = "")
-tri.num.50[names(tri.num.50) %in% c(vowels, double.vowels)]
+vowel_named_numbers <- tri.num.50[grep('[aeiou]', nm)]

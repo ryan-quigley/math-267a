@@ -1,7 +1,9 @@
-# Group B problem 2
-# Ian Dupzyk
-# Ryan Quigley
-# Sucharu Gupta
+# Section 2
+# Group B 
+#  Ian Dupzyk
+#  Ryan Quigley
+#  Sucharu Gupta
+# Problem 2
 
 # a)
 tri.num.20 <- as.numeric(c(1:20))
@@ -10,16 +12,14 @@ for (i in tri.num.20[2:20]) {
     tri.num.20[i] <- tri.num.20[i-1]+i
 }
 
-
 # b)
 x <- c(1:20)
 tri.num.20 <- x*(x+1)/2
-cat(tri.num.20, fill=TRUE)
-
 
 # c)
 N <- 100000
 
+# iterative approach
 system.time({
     tri.num <- as.numeric(c(1:N))
 
@@ -28,6 +28,7 @@ system.time({
     }
 })
 
+# vectorized approach
 system.time({
     x <- c(1:N)
     tri.num <- x*(x+1)/2
@@ -39,7 +40,6 @@ tri.num.50 <- x*(x+1)/2
 nm <- unlist(list(letters, paste(letters, letters, sep='')))
 length(nm) <- 50
 names(tri.num.50) <- nm
-tri.num.50
 
 # e)
 vowel_named_numbers <- tri.num.50[grep('[aeiou]', nm)]

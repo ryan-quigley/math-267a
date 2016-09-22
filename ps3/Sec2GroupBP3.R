@@ -1,7 +1,9 @@
-# Group B problem 2
-# Ian Dupzyk
-# Ryan Quigley
-# Sucharu Gupta
+# Section 2
+# Group B 
+#  Ian Dupzyk
+#  Ryan Quigley
+#  Sucharu Gupta
+# Problem 3
 
 squareNumbers <- function(n) {
     # input validation

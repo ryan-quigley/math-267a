@@ -1,5 +1,7 @@
 # Section 2
-# Group X
+# Group C
+#  Jennifer Chu
+#  Samnang Tep
 #  Ryan Quigley
 # Problem 2
 
@@ -32,6 +34,6 @@ caffeine.bad["0"]  # R interprets this as a name
 caffeine.bad["0",]  # R returns all values in row 0 which does not exist
 caffeine.bad["100"] # R interprets this as a name
 caffeine.bad["100",]  # R returns all values in row 100 which does not exist
-caffeine["1",]
-caffeine$100
-caffeine$`100`
+caffeine.bab["1",]
+caffeine.bad$100
+caffeine.bad$`100`

@@ -1,5 +1,7 @@
 # Section 2
-# Group X
+# Group C
+#  Jennifer Chu
+#  Samnang Tep
 #  Ryan Quigley
 # Problem 3
 

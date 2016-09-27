@@ -65,5 +65,16 @@ system.time({
 	beta3 <- solve(xt.x.3, xt.y.3)
 })
 ```
-g)
-h)
+g) TODO: The computation time decreases with each but why???
+h) Once `X` has been converted from a matrix to a data frame, $\hat{\beta}$ cannot be calculated using the code from part (c) because the matrix multiplication operator `%*%` does not work with data frames. Data frames have the ability to store values of different types, which is not appropriate for matrix multiplication. Instead of checking all of the columns of the data frame to makes sure they are all numeric (or complex), R simply checks the class of the objects being multiplied and throws an error if they are not appropriate.
+```{r, echo = FALSE, error = TRUE}
+X.df <- data.frame(X)
+
+system.time({
+	x.t <- t(X.df)
+	a <- x.t %*% X.df
+	a.inv <- solve(a)
+	xt.y1 <- x.t %*% y
+	beta1 <- a.inv %*% xt.y
+})
+```

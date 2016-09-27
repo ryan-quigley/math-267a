@@ -24,11 +24,11 @@ colnames(X)
 # b: a numeric or complex vector or matrix giving the right-hand side(s) of the linear system. If missing, b is taken to be an identity matrix and solve will return the inverse of a.
 
 system.time({
-	x.t <- t(X)
-	a <- x.t %*% X
-	a.inv <- solve(a)
-	xt.y1 <- x.t %*% y
-	beta1 <- a.inv %*% xt.y
+	xt <- t(X)
+	xt.x.1 <- xt %*% X
+	xt.x.inv.1 <- solve(xt.x.1)
+	xt.y.1 <- xt %*% y
+	beta1 <- xt.x.inv.1 %*% xt.y.1
 })
 dim(beta1)
 
@@ -36,18 +36,18 @@ dim(beta1)
 ?crossprod
 
 system.time({
-	b <- crossprod(X)
-	b.inv <- solve(b)
-	xt.y2 <- crossprod(X, y)
-	beta2 <- crossprod(b.inv, xt.y)
+	xt.x.2 <- crossprod(X)
+	xt.x.inv.2 <- solve(xt.x.2)
+	xt.y.2 <- crossprod(X, y)
+	beta2 <- crossprod(xt.x.inv.2, xt.y.2)
 })
 dim(beta2)
 
 # e)
 system.time({
-	xt.x <- crossprod(X)
-	xt.y3 <- crossprod(X, y)
-	beta3 <- solve(xt.x, xt.y3)
+	xt.x.3 <- crossprod(X)
+	xt.y.3 <- crossprod(X, y)
+	beta3 <- solve(xt.x.3, xt.y.3)
 })
 
 # f)
@@ -61,10 +61,18 @@ all.equal(beta1, beta3, tol = 1e-12)
 X.df <- data.frame(X)
 
 system.time({
-	x.t <- t(X)
-	a <- x.t %*% X
+	x.t <- t(X.df)
+	a <- x.t %*% X.df
 	a.inv <- solve(a)
 	xt.y1 <- x.t %*% y
-	beta1 <- a.inv %*% xt.y
+	beta4 <- a.inv %*% xt.y
 })
-dim(beta1)
+dim(beta4)
+
+system.time({
+	xt.x.5 <- crossprod(X.df)
+	xt.y.5 <- crossprod(X.df, y)
+	beta5 <- solve(xt.x.5, xt.y.5)
+})
+
+?matmult

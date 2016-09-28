@@ -48,7 +48,7 @@ Problem Set 4
     })
     ```
 
-    **(d\)**  Note we passed $(X^TX)^{-1}$ and $X^Ty$ to `crossprod` as the first and second arguments, respectively. According the `crossprod` help page, this is equivalent to calculating $((X^TX)^{-1})^T X^Ty$, which some might expect to give a different result than desired. However, $X^TX$ is a symmetric matrix, and so $(X^TX)^{-1})^T = (X^TX)^T)^{-1} = (X^TX)^{-1}$. Thus, using `solve` for matrix inversion and `crossprod` for matrix multiplication, the time that it took to compute $\hat{\beta}$ was:
+    **(d\)**  Note: we passed $(X^TX)^{-1}$ and $X^Ty$ to `crossprod` as the first and second arguments, respectively. According the `crossprod` help page, this is equivalent to calculating $((X^TX)^{-1})^T X^Ty$, which some might expect to give a different result than desired. However, $X^TX$ is a symmetric matrix, and so $((X^TX)^{-1})^T = ((X^TX)^T)^{-1} = (X^TX)^{-1}$. Thus, using `solve` for matrix inversion and `crossprod` for matrix multiplication, the time that it took to compute $\hat{\beta}$ was:
     ```{r, echo = FALSE}
     system.time({
     	xt.x.2 <- crossprod(X)
@@ -76,7 +76,8 @@ Problem Set 4
 
     **(g\)**  From part (c) to part (e), the time required to compute $\hat{\beta}$ gets progressively shorter, i.e, (e) is faster than (d) and (d) is faster than (c). According to the help page, `crossprod` is usually slightly faster than using `t` and `%*%`. In part (d), the equation to calculate $\hat{\beta}$ is the same, but in R we are making less function calls: in (c) we make 5 calls (1 `t`, 2 `%*%`, and 1 `solve`) whereas in (d) we make 4 calls (3 `crossprod` and 1 `solve`). Additionally, `crossprod(X)` is much faster than `t(X) %*% X` because $X^TX$ is known to be symmetric. As a result, only one triangle of the matrix needs to be calculated, and a dramatic speed improvement is expected (Bates & Eddelbuettel, 2013). In part (e), the equation rearrangment allows us to make one less `crossprod` call, so we again expect an improvement in performance over part (d).
 
-    **(h\)** Once `X` has been converted from a matrix to a data frame, $\hat{\beta}$ cannot be calculated using the code from part (c) because the matrix multiplication operator `%*%` does not work with data frames. Data frames have the ability to store values of different types, which is not appropriate for matrix multiplication. Instead of checking all of the columns of the data frame to makes sure they are all numeric (or complex), R simply checks the class of the objects being multiplied and throws an error if they are not appropriate.
+    **(h\)** Converting `X` to a data frame and repeating part (c) results in the following error:
+    
     ```{r, echo = FALSE, error = TRUE}
     X.df <- data.frame(X)
     
@@ -89,6 +90,8 @@ Problem Set 4
     })
     ```
     
+    Once `X` has been converted from a matrix to a data frame, $\hat{\beta}$ cannot be calculated using the code from part (c) because the matrix multiplication operator `%*%` does not work with data frames. Data frames have the ability to store values of different types, which is not appropriate for matrix multiplication. Instead of checking all of the columns of the data frame to makes sure they are all numeric (or complex), R simply checks the class of the objects being multiplied and throws an error if they are not appropriate.
+
     In order to get it to work, we must convert `X` back to a matrix using the `as.matrix` function. Even if we include the matrix conversion in the timing of the code, the performance results are very similar to those from part (c). It would seem R can perform data frame to matrix conversion rather quickly.
     ```{r}
     system.time({

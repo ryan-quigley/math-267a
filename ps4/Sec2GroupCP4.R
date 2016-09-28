@@ -7,20 +7,19 @@
 
 # a) 
 name <- scan("ps04p4.txt", what = character(), sep = "\n")
-space.rm <- gsub('\\s', '.', name)
-user <- gsub('([A-Z])', '\\L\\1', space.rm, perl = TRUE)
-email <- paste(user, "@ponyville.edu", sep = "")
+space.rm <- gsub(' ', '.', name)
+email <- paste(tolower(user), "@ponyville.edu", sep = "")
 
 
 # b)
-groups <- LETTERS[1:(length(name)/3)]
-rs <- sample(email, size = length(email))
-name.ordered <- name[match(rs, email)]
-ps1grps <- data.frame(name = name.ordered, email = rs, ps1 = groups)
+groups <- rep(LETTERS[1:(length(name)/3)], each = 3)
+rs <- sample(groups)
+ps1grps <- data.frame(name = name, email = email, ps1 = rs)
 
 
 # c)
-write.table(ps1grps, "ps1grps.txt", quote = FALSE, sep = ",", row.names = FALSE)
+# col.names = TRUE by default
+write.table(ps1grps, "ps1grps.txt", quote = FALSE, row.names = FALSE, sep = ",") 
 
 
 # d)

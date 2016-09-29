@@ -48,10 +48,14 @@ all.equal(beta2, beta3, tol = 1e-12)
 
 # h)
 X.df <- data.frame(X)
-system.time({
-	xt <- t(X.df)
-	xt.x.4 <- xt %*% X.df
-	xt.x.inv.4 <- solve(a)
-	xt.y.4 <- xt %*% y
-	beta4 <- xt.x.inv.4 %*% xt.y
-})
+
+# The following code gives an error due to an invalid object type for the %*% operator
+# It is commented out to ensure that the file can be sourced without error
+
+# system.time({
+#	 xt <- t(X.df)
+#	 xt.x.4 <- xt %*% X.df
+#	 xt.x.inv.4 <- solve(a)
+#	 xt.y.4 <- xt %*% y
+#	 beta4 <- xt.x.inv.4 %*% xt.y
+# })

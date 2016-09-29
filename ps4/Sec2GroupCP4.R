@@ -8,7 +8,7 @@
 # a) 
 name <- scan("ps04p4.txt", what = character(), sep = "\n")
 space.rm <- gsub(' ', '.', name)
-email <- paste(tolower(user), "@ponyville.edu", sep = "")
+email <- paste(tolower(space.rm), "@ponyville.edu", sep = "")
 
 
 # b)

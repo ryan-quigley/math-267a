@@ -12,6 +12,7 @@ name.split <- strsplit(psgrps$name, " ")
 name.nums <- sapply(name.split, length)
 no.last <- as.integer(rownames(psgrps)[name.nums == 1])
 
+
 # b)
 # For loop
 fullname <- matrix(NA, nrow = 24, ncol = 2)
@@ -38,6 +39,7 @@ f <- function(x) {
 names.list <- lapply(name.split, f)
 fullname <- matrix(unlist(names.list), ncol = 2, byrow = TRUE)
 
+
 # c)
 dimnames(fullname) <- list(NULL, c("first", "last"))
 names.df <- cbind(fullname, psgrps[2:4])
@@ -47,15 +49,59 @@ psgrps.x <- names.df[ord, ]
 # CHECK
 print(psgrps.x, row.names = FALSE) # GOOD
 
+
 # d)
 # Should the row.names of psgrps.x be reindexed?
-# Should it be a list with 24 components...one component for each student?
+# Should it be a list with 24 components...one component for each student? Probably yes...
 grp.names <- list()
 length(grp.names) <- 24
 for (i in 1:24) {
-	grp.letter <- psgrps.x$ps1[i]
-	grp.mates <- rownames(psgrps.x)[psgrps.x$ps1 == grp.letter]
-	grp.names[[i]] <- as.integer(grp.mates)
+	grp.ps1 <- psgrps.x$ps1[i]
+	grp.mates.ps1 <- rownames(psgrps.x)[psgrps.x[-i,]$ps1 == grp.ps1]
+	grp.names[[i]] <- as.integer(grp.mates.ps1)
+	grp.ps2 <- psgrps.x$ps2[i]
+	grp.mates.ps2 <- rownames(psgrps.x)[psgrps.x[-i,]$ps2 == grp.ps2]
+	grp.names[[i]] <- c(grp.names[[i]], as.integer(grp.mates.ps2))
 }
-# OR should it have 8 components...one for each group?
+# But can it be done without a for loop? Probably yes
+
+# OR should it have 8 components...one for each group? Probably not
 grp.names <- split(row.names(psgrps.x), psgrps.x$ps1)
+
+
+# e)
+l <- sapply(grp.names, length)
+u <- lapply(grp.names, unique)
+lu <- sapply(u, length)
+# grp.names[lu < l]
+rep.list <- u[lu < l]
+repeats <- unique(unlist(rep.list))
+
+
+# f)
+ps2 <- rep(LETTERS[1:8], times = 3)
+ord.grps <- order(psgrps.x$ps1, decreasing = FALSE)
+names.df.ord <- cbind(psgrps.x[ord.grps, -5], ps2)
+# resort according to instructions from part (c)
+ord.c <- order(names.df.ord[, 2], names.df.ord[, 1], na.last = FALSE, decreasing = FALSE)
+psgrps.new <- names.df.ord[ord.c, ]
+
+# check repeats
+grp.names <- list()
+length(grp.names) <- 24
+for (i in 1:24) {
+	grp.ps1 <- psgrps.new$ps1[i]
+	grp.mates.ps1 <- rownames(psgrps.new)[psgrps.new[-i,]$ps1 == grp.ps1]
+	grp.names[[i]] <- as.integer(grp.mates.ps1)
+	grp.ps2 <- psgrps.new $ps2[i]
+	grp.mates.ps2 <- rownames(psgrps.new)[psgrps.new[-i,]$ps2 == grp.ps2]
+	grp.names[[i]] <- c(grp.names[[i]], as.integer(grp.mates.ps2))
+}
+l <- sapply(grp.names, length)
+u <- lapply(grp.names, unique)
+lu <- sapply(u, length)
+# grp.names[lu < l]
+rep.list <- u[lu < l]
+( repeats <- unique(unlist(rep.list)) )
+# Repeats gives NULL
+

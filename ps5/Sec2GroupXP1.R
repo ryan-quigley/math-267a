@@ -57,10 +57,14 @@ grp.names <- list()
 length(grp.names) <- 24
 for (i in 1:24) {
 	grp.ps1 <- psgrps.x$ps1[i]
-	grp.mates.ps1 <- rownames(psgrps.x)[psgrps.x[-i,]$ps1 == grp.ps1]
+	idx.ps1 <- psgrps.x$ps1 == grp.ps1
+	idx.ps1[i] <- FALSE
+	grp.mates.ps1 <- rownames(psgrps.x)[idx.ps1]
 	grp.names[[i]] <- as.integer(grp.mates.ps1)
 	grp.ps2 <- psgrps.x$ps2[i]
-	grp.mates.ps2 <- rownames(psgrps.x)[psgrps.x[-i,]$ps2 == grp.ps2]
+	idx.ps2 <- psgrps.x$ps2 == grp.ps2
+	idx.ps2[i] <- FALSE
+	grp.mates.ps2 <- rownames(psgrps.x)[idx.ps2]
 	grp.names[[i]] <- c(grp.names[[i]], as.integer(grp.mates.ps2))
 }
 # But can it be done without a for loop? Probably yes
@@ -91,10 +95,14 @@ grp.names <- list()
 length(grp.names) <- 24
 for (i in 1:24) {
 	grp.ps1 <- psgrps.new$ps1[i]
-	grp.mates.ps1 <- rownames(psgrps.new)[psgrps.new[-i,]$ps1 == grp.ps1]
+	idx.ps1 <- psgrps.new$ps1 == grp.ps1
+	idx.ps1[i] <- FALSE
+	grp.mates.ps1 <- rownames(psgrps.new)[idx]
 	grp.names[[i]] <- as.integer(grp.mates.ps1)
-	grp.ps2 <- psgrps.new $ps2[i]
-	grp.mates.ps2 <- rownames(psgrps.new)[psgrps.new[-i,]$ps2 == grp.ps2]
+	grp.ps2 <- psgrps.new$ps2[i]
+	idx.ps2 <- psgrps.new$ps2 == grp.ps2
+	idx.ps2[i] <- FALSE
+	grp.mates.ps2 <- rownames(psgrps.new)[idx.ps2]
 	grp.names[[i]] <- c(grp.names[[i]], as.integer(grp.mates.ps2))
 }
 l <- sapply(grp.names, length)
@@ -104,4 +112,3 @@ lu <- sapply(u, length)
 rep.list <- u[lu < l]
 ( repeats <- unique(unlist(rep.list)) )
 # Repeats gives NULL
-

@@ -1,9 +1,10 @@
 # Section 2
-# Group X
+# Group C
 #  Qiaoqiao Jiang
 #  Yunyun Tao
 #  Ryan Quigley
 # Problem 2
+
 #### PDF dimensions / aspect ratio????
 pdf("ps06p2.pdf", width = 8, height = 5)
 # Dataset

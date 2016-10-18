@@ -42,7 +42,7 @@
 #		- font: sans serif
 #		- fontsize: 3 times the default value
 # Section 2
-# Group X
+# Group C
 #  Qiaoqiao Jiang
 #  Yunyun Tao
 #  Ryan Quigley

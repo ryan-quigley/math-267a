@@ -5,8 +5,9 @@
 #  Ryan Quigley
 # Problem 2
 
-#### PDF dimensions / aspect ratio????
-pdf("ps06p2.pdf", width = 8, height = 5)
+# Start PDF device
+pdf("ps06p2.pdf", width = 9, height = 5)
+
 # Dataset
 data(Cars93, package = "MASS")
 
@@ -88,5 +89,5 @@ points(black.dots2, pch = 20, xlim = c(0,70))
 points(white.dots2, pch = 21, col = "black", bg = "white", cex = (2/3))
 title(xlab = "a", ylab = "g(a)")
 
-
+# End PDF device
 dev.off()

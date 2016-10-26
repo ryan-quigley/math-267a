@@ -1,27 +1,16 @@
 # Section 2
-# Group X
-#  Y
-#  Z
+# Group F
+#  Aran Lee
+#  Tianyang Chen
 #  Ryan Quigley
 # Problem 3
 
-# Calcs for P2 (Remove before submitting)
-((2.25 - 1)/0.8)
-(3/4)*(1 - ((2.25 - 1)/0.8)^2)
 
-((2.25 - 1.2)/0.8)
-(3/4)*(1 - ((2.25 - 1.2)/0.8)^2)
-
-((2.25 - 1.5)/0.8)
-(3/4)*(1 - ((2.25 - 1.5)/0.8)^2)
-
-((2.25 - 2.8)/0.8)
-(3/4)*(1 - ((2.25 - 2.8)/0.8)^2)
-
-((2.25 - 3)/0.8)
-(3/4)*(1 - ((2.25 - 3)/0.8)^2)
-
+### The following two numbers should be very close
+# Direct calculation of the the kernel density estimate of f(2.25)
 (1/(5*0.8))*((3/4)*(1 - ((2.25 - 1.5)/0.8)^2) + (3/4)*(1 - ((2.25 - 2.8)/0.8)^2) + (3/4)*(1 - ((2.25 - 3)/0.8)^2))
+# Function calculation of the same
+sum(epanechnikov(a = 2.25, x = c(1, 1.2, 1.5, 2.8, 3), h = 0.8))/5
 
 
 # Code for Problem 3
@@ -42,21 +31,29 @@ epanechnikov <- function(a, x = 0, h = 1) {
 	}
 	
 	# Kernel computation
-	Kh <- numeric(length(a))
-	u <- (a - x)/h
-	u.in <- u[abs(u) < 1]
-	Kh.in <- (1/h)*(3/4)*(1 - u.in^2)
-	Kh[abs(u) < 1] <- Kh.in
+	if (length(x) > 1) {
+		x.mat <- rep(x, each = length(a))
+		Kh <- numeric(length(x.mat))
+		u <- (a - x.mat)/h
+		u.in <- u[abs(u) < 1]
+		Kh.in <- (1/h)*(3/4)*(1 - u.in^2)
+		Kh[abs(u) < 1] <- Kh.in
+		dim(Kh) <- c(length(a), length(x))
+	} else {
+		Kh <- numeric(length(a))
+		u <- (a - x)/h
+		u.in <- u[abs(u) < 1]
+		Kh.in <- (1/h)*(3/4)*(1 - u.in^2)
+		Kh[abs(u) < 1] <- Kh.in
+	}
 	Kh
 }
-
 
 epanechnikov(1.2)
 epanechnikov(c(1.2, 1.5, 1.8, 0.8))
 epanechnikov(1.2, x = 1, h = 0.5)
 epanechnikov(c(1.2, 1.5, 1.8, 0.8), x = 1, h = 0.5)
-epanechnikov(c(1.2, 1.5, 1.8, 0.8), x = 0.5, h = 0.5)
-epanechnikov(c(1.2, 1.5, 1.8, 0.8), x = 1.5, h = 0.5)
+epanechnikov(c(1.2, 1.5, 1.8, 0.8), x = c(0.5, 1, 1.5), h = 0.5)
 epanechnikov(1.2, x = 2.8, h = 0.5)
 epanechnikov("1.2")
 epanechnikov(1.2, x = "1", h = 0.5)
@@ -76,18 +73,11 @@ expr4 <- expression(K[0.75](a - 1))
 legend(1, 2, legend = c(expr1, expr2, expr3, expr4), bty = "n", lty = 1, col = c("violetred", "slateblue2", "gold", "springgreen"))
 title(xlab = "a", ylab = "Density")
 
-# c) 
-# What does she mean by "do not perform the computation for each observation"? 
-# Does the (a) function need to be modified to accept a vector for x?
+# c) function should return matrix
 x <- c(1, 1.2, 1.5, 2.8, 3)
 a.j <- seq.int(0, 4, length.out = 500)
 h = 0.75
-xK1 <- (1/5)*epanechnikov(a.j, x = x[1], h = h)
-xK2 <- (1/5)*epanechnikov(a.j, x = x[2], h = h)
-xK3 <- (1/5)*epanechnikov(a.j, x = x[3], h = h)
-xK4 <- (1/5)*epanechnikov(a.j, x = x[4], h = h)
-xK5 <- (1/5)*epanechnikov(a.j, x = x[5], h = h)
-sand.piles <- cbind(xK1, xK2, xK3, xK4, xK5)
+sand.piles <- (1/5)*epanechnikov(a.j, x = x, h = h)
 m <- max(sand.piles)
 
 plot(x, rep(0, 5), type = "n", xlim = c(0,4), ylim = c(0, 0.6), axes = FALSE, ann = FALSE)

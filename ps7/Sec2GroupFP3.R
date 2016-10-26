@@ -6,14 +6,6 @@
 # Problem 3
 
 
-### The following two numbers should be very close
-# Direct calculation of the the kernel density estimate of f(2.25)
-(1/(5*0.8))*((3/4)*(1 - ((2.25 - 1.5)/0.8)^2) + (3/4)*(1 - ((2.25 - 2.8)/0.8)^2) + (3/4)*(1 - ((2.25 - 3)/0.8)^2))
-# Function calculation of the same
-sum(epanechnikov(a = 2.25, x = c(1, 1.2, 1.5, 2.8, 3), h = 0.8))/5
-
-
-# Code for Problem 3
 # a)
 
 epanechnikov <- function(a, x = 0, h = 1) {
@@ -49,18 +41,11 @@ epanechnikov <- function(a, x = 0, h = 1) {
 	Kh
 }
 
-epanechnikov(1.2)
-epanechnikov(c(1.2, 1.5, 1.8, 0.8))
-epanechnikov(1.2, x = 1, h = 0.5)
-epanechnikov(c(1.2, 1.5, 1.8, 0.8), x = 1, h = 0.5)
-epanechnikov(c(1.2, 1.5, 1.8, 0.8), x = c(0.5, 1, 1.5), h = 0.5)
-epanechnikov(1.2, x = 2.8, h = 0.5)
-epanechnikov("1.2")
-epanechnikov(1.2, x = "1", h = 0.5)
-epanechnikov(1.2, x = 2.8, h = -0.5)
+
 
 # b)
-curve(epanechnikov(a, x = 0, h = 1), from = -3, to = 3, xname = "a", xlim = c(-3,3), ylim = c(0,2), axes = FALSE, ann = FALSE, col = "violetred")
+curve(epanechnikov(a, x = 0, h = 1), from = -3, to = 3, 
+	xname = "a", xlim = c(-3,3), ylim = c(0,2), axes = FALSE, ann = FALSE, col = "violetred")
 curve(epanechnikov(a, x = 0, h = 0.5), from = -3, to = 3, xname = "a", add = TRUE, col = "slateblue2")
 curve(epanechnikov(a, x = 0, h = 2), from = -3, to = 3, xname = "a", add = TRUE, col = "gold")
 curve(epanechnikov(a, x = 1, h = 0.75), from = -3, to = 3, xname = "a", add = TRUE, col = "springgreen")
@@ -70,8 +55,11 @@ expr1 <- expression(K[1](a))
 expr2 <- expression(K[0.5](a))
 expr3 <- expression(K[2](a))
 expr4 <- expression(K[0.75](a - 1))
-legend(1, 2, legend = c(expr1, expr2, expr3, expr4), bty = "n", lty = 1, col = c("violetred", "slateblue2", "gold", "springgreen"))
+legend(1, 2, legend = c(expr1, expr2, expr3, expr4), 
+	bty = "n", lty = 1, col = c("violetred", "slateblue2", "gold", "springgreen"))
 title(xlab = "a", ylab = "Density")
+
+
 
 # c) function should return matrix
 x <- c(1, 1.2, 1.5, 2.8, 3)
@@ -95,6 +83,7 @@ lines(a.j, sand.piles[, 5], col = "slateblue2", lty = 2)
 lines(rep(x[5], 2), c(0, m), col = "grey50", lty = 3)
 title(xlab = "a", ylab = "Density")
 stripchart(x, method = "stack", pch = 20, col = "red", add = TRUE, cex = 2, at = 0)
+
 
 
 # d)

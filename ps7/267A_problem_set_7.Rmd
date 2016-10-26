@@ -14,7 +14,7 @@ Problem Set 7
 1. 
 a) In order to show that $\hat{f}_h(a)$ is a probability density function, we must show two things: (1) $\hat{f}_h(a) \geq 0, ~ \forall a$ and (2) $\int\limits_{-\infty}^{\infty} \hat{f}_h(a) da = 1$.  
 
-    For condition (1), we know that $n$ is the sample size so it is a positive integer. It is given that $K(u) \geq 0 , ~ \forall u$ and h > 0. This implies that  $\sum\frac{1}{h}K\left(\frac{a - x_i}{h}\right) \geq 0 , ~  \forall a$. Thus, we have shown that $\hat{f}_h(a) \geq 0, ~ \forall a$.  
+    For condition (1), we know that $n$ is the sample size so it is a positive integer. It is given that $K(u) \geq 0 , ~ \forall u$ and h > 0. This implies that  $\sum\frac{1}{h}K\left(\frac{a - x_i}{h}\right) \geq 0 , ~  \forall a$. Thus, it follows that $\hat{f}_h(a) \geq 0, ~ \forall a$.  
 
     For condition (2),
 \begin{align*}
@@ -36,12 +36,12 @@ b)
 \intertext{Let $v_i = \frac{u - x_i}{h} \implies dv_i = \frac{1}{h}du \implies u = v_ih + x_i$. Note, the transformation does not affect the limits of the integral. By substitution,}
 & = \frac{1}{n} \left[  \int\limits_{-\infty}^{\infty} (v_1h + x_1) K(v_1) dv_1 + ... + \int\limits_{-\infty}^{\infty} (v_nh + x_n)K(v_n)dv_n  \right] \\
 & = \frac{1}{n} \left[  h \int\limits_{-\infty}^{\infty} v_1 K(v_1) dv_1 + x_1 \int\limits_{-\infty}^{\infty} K(v_1) dv_1 + ... + h \int\limits_{-\infty}^{\infty} v_n K(v_n) dv_n + x_n \int\limits_{-\infty}^{\infty} K(v_n) dv_n  \right] \\
-\intertext{From the given information, each of the integrals of the form $\int\limits_{-\infty}^{\infty} K(u)$ evaluates to 1. Additionally, since the kernel is symmetric around 0, the integrals of the form $\int\limits_{-\infty}^{\infty} u K(u) du$ evaluate to 0.}
-& = \frac{1}{n} \left[  0 + x_1 \cdot 1 + ... + 0 + x_n \cdot 1  \right] \\
-& =  \frac{x_1  + ...  + x_n }{n}   \\
-& = \bar{x}
+\intertext{From the given information, each of the integrals of the form $\int\limits_{-\infty}^{\infty} K(u)$ evaluates to 1. Additionally, let the mean of the kernel be represented by $\mu_k = \int\limits_{-\infty}^{\infty} v_1 K(v_1) dv_1$,}
+& = \frac{1}{n} \left[h \cdot \mu_k + x_1 + ... + h \cdot \mu_k + x_n \right] \\
+& = h\cdot \mu_k + \bar{x} \\
+& = \text{bandwidth}\cdot\text{kernel mean} + \text{sample mean}
 \end{align*}
-!!!!INTERPRETATION!!!!
+By definition, we know $m_1$ is the expectation of the kernel density estimate, $\hat{f}_h(u)$. This expectation depends on the bandwidth, the kernel function, and the particular sample that is observed. Thus, the specific choices of bandwidth and kernel will have an influence on where the kernel density estimate is located, and the location will also change with each sample.
 
 2. The kernel density estimate of $f(2.25)$ is,
 \begin{align*}

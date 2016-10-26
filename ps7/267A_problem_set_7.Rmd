@@ -4,7 +4,7 @@ header-includes:
    - \usepackage{dsfont}
 ---
 \begin{flushright}
-Y, Z, Ryan Quigley \\
+Aran Lee, Tianyang Chen, Ryan Quigley \\
 MATH 267A
 \end{flushright}
 \begin{center}

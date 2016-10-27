@@ -14,11 +14,11 @@ Problem Set 7
 1. 
 a) In order to show that $\hat{f}_h(a)$ is a probability density function, we must show two things: (1) $\hat{f}_h(a) \geq 0, ~ \forall a$ and (2) $\int\limits_{-\infty}^{\infty} \hat{f}_h(a) da = 1$.  
 
-    For condition (1), we know that $n$ is the sample size so it is a positive integer. It is given that $K(u) \geq 0 , ~ \forall u$ and h > 0. This implies that  $\sum\frac{1}{h}K\left(\frac{a - x_i}{h}\right) \geq 0 , ~  \forall a$. Thus, it follows that $\hat{f}_h(a) \geq 0, ~ \forall a$.  
+    For condition (1), we know that $n$ is the sample size so it is a positive integer. It is given that $K(u) \geq 0 , ~ \forall u$ and h > 0. This implies that  $\sum\limits_{i=1}^n \frac{1}{h}K\left(\frac{a - x_i}{h}\right) \geq 0 , ~  \forall a$. Thus, it follows that $\hat{f}_h(a) \geq 0, ~ \forall a$.  
 
     For condition (2),
 \begin{align*}
-\int\limits_{-\infty}^{\infty} \hat{f}_h(a) da & = \int\limits_{-\infty}^{\infty} \frac{1}{n} \sum \frac{1}{h}K\left(\frac{a - x_i}{h}\right) da \\
+\int\limits_{-\infty}^{\infty} \hat{f}_h(a) da & = \int\limits_{-\infty}^{\infty} \frac{1}{n} \sum\limits_{i=1}^n \frac{1}{h}K\left(\frac{a - x_i}{h}\right) da \\
 & = \int\limits_{-\infty}^{\infty} \frac{1}{n} \left[ \frac{1}{h}K\left(\frac{a - x_1}{h}\right) + ... + \frac{1}{h}K\left(\frac{a - x_n}{h}\right) \right] da \\
 & = \frac{1}{n} \left[  \int\limits_{-\infty}^{\infty}  \frac{1}{h}K\left(\frac{a - x_1}{h}\right) da + ... + \int\limits_{-\infty}^{\infty} \frac{1}{h}K\left(\frac{a - x_n}{h}\right)da  \right] \\
 \intertext{Let $u_i = \frac{a - x_i}{h} \implies du_i = \frac{1}{h}da$. Note, the transformation does not affect the limits of the integral. By substitution,}
@@ -31,7 +31,7 @@ a) In order to show that $\hat{f}_h(a)$ is a probability density function, we mu
   
 b)
 \begin{align*}
-\int\limits_{-\infty}^{\infty} u\hat{f}_h(u) du & = \int\limits_{-\infty}^{\infty} u \cdot \frac{1}{n} \sum \frac{1}{h}K\left(\frac{u - x_i}{h}\right) du \\
+\int\limits_{-\infty}^{\infty} u\hat{f}_h(u) du & = \int\limits_{-\infty}^{\infty} u \cdot \frac{1}{n} \sum\limits_{i=1}^n \frac{1}{h}K\left(\frac{u - x_i}{h}\right) du \\
 & = \frac{1}{n} \left[  \int\limits_{-\infty}^{\infty}  u \cdot \frac{1}{h}K\left(\frac{u - x_1}{h}\right) du + ... + \int\limits_{-\infty}^{\infty} u \cdot \frac{1}{h}K\left(\frac{u - x_n}{h}\right)du  \right] \\
 \intertext{Let $v_i = \frac{u - x_i}{h} \implies dv_i = \frac{1}{h}du \implies u = v_ih + x_i$. Note, the transformation does not affect the limits of the integral. By substitution,}
 & = \frac{1}{n} \left[  \int\limits_{-\infty}^{\infty} (v_1h + x_1) K(v_1) dv_1 + ... + \int\limits_{-\infty}^{\infty} (v_nh + x_n)K(v_n)dv_n  \right] \\

@@ -56,12 +56,13 @@ expr2 <- expression(K[0.5](a))
 expr3 <- expression(K[2](a))
 expr4 <- expression(K[0.75](a - 1))
 legend(1, 2, legend = c(expr1, expr2, expr3, expr4), 
-	bty = "n", lty = 1, col = c("violetred", "slateblue2", "gold", "springgreen"))
+	bty = "n", lty = 1, col = c("violetred", "slateblue2", "gold", "springgreen"),
+	y.intersp = 1.25)
 title(xlab = "a", ylab = "Density")
 
 
 
-# c) function should return matrix
+# c) 
 x <- c(1, 1.2, 1.5, 2.8, 3)
 a.j <- seq.int(0, 4, length.out = 500)
 h = 0.75

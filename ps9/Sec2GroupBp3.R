@@ -16,8 +16,8 @@ s <- sd(x)
 #hist(x, breaks = 20, freq = FALSE, right = FALSE, col = "royalblue", border = "aquamarine", xlim = c(0,1))
 
 
-h <- 0.05
-krn <- "gaussian"
+h <- 0.04
+krn <- "triangular"
 d <- density(x, kernel = krn, bw = h, from = -0.5, to = 1.5)
 
 y.up <- ceiling(max(d$y)) + 1

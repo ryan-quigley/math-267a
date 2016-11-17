@@ -1,0 +1,126 @@
+---
+output: pdf_document
+header-includes:
+   - \usepackage{dsfont}
+fontsize: 12pt
+geometry: margin=0.75in
+---
+\begin{flushright}
+Beatriz Hernandez, Jimmy Nguyen, Ryan Quigley \\
+MATH 267A \\
+Section 2  \\
+Group D  \\
+\end{flushright}
+\begin{center}
+Problem Set 9
+\end{center}
+
+1.
+
+a) The mystery distribution (MD) has thinner left and right tails than the normal distribution (ND), which suggest that the MD has higher quartile values than the ND in regions 1 and 3.  Though both the MD and ND peak in region 2, the peak of the MD is higher than the ND, with larger portion of area under the PDF curve in this region compared to ND.  This suggests a smaller variance of the MD compared to the ND.  
+b) In region 1, the points do describe the difference between the left tails of the MD and ND.  In this region, the MD has higher quantile values associated with the quantiles of the ND; that is, the MD requires higher quantile values to achieve the same area under the PDF curve  as the ND.  The points in the QQ plot in region 1 do describe the thinner left tail of the MD depicted in region 1 on the left panel.  
+c) The points in region 3 of the right panel suggest that the quantiles of the MD are linearly related to the quantiles of the ND, but in this case, we cannot tell whether the right tail of the MD will be thinner or thicker than the ND; only that the quantiles are proportional in a linear fashion.  Furthermore, the points in region 2 in the QQ plot do not give us any information that could help us determine if the MD will have thicker or thinner right tail compared to ND.  All we can determine is that the MD behaves like a normal distribution in regions 2 and 3.  
+d) Q-q plots cannot be solely relied on to make accurate inferences about the underlying distribution of sample data.  Though q-q plots can be a useful piece in determining whether the unknown probability distribution of the sample data grossly deviates from a known family of distributions, these plots do not allow us to catch key but more subtle differences, or even not so subtle ones as shown in region 2 of the left panel in this exercise.
+
+2.
+\begin{align*}
+p & = 0 & F^-(0) & = inf\{x \in \mathds{R} : F(x) \geq 0\} \\
+&& & = inf(-\infty, \infty) \\
+&& & = -\infty \\
+&& & := 0 \\
+0 < p & < \frac{1}{4} & F^-(p) & = F^{-1}(p) \quad \text{by prop. 2}\\
+&& p & = \frac{x}{4} \Rightarrow x = 4p \\
+p & = \frac{1}{4} & F^-(\frac{1}{4}) & = inf\{x \in \mathds{R} : F(x) \geq \frac{1}{4}\} \\
+&& & = inf[1, \infty) \\
+&& & = 1 \\
+\frac{1}{4} < p & < \frac{1}{2} & F^-(p) & = inf\{x \in \mathds{R} : F(x) \geq p\} \\
+\intertext{If $x < 1$, $F(x) < \frac{1}{4}$; if $x \geq 1$, $F(x) \geq \frac{1}{2}$}
+&& \Rightarrow & = inf[1, \infty) \\
+&& & = 1 \\
+p & = \frac{1}{2} & F^-(\frac{1}{2}) & = inf\{x \in \mathds{R} : F(x) \geq \frac{1}{2}\} \\
+&& & = inf[1, \infty) \\
+&& & = 1 \\
+\frac{1}{2} < p & \leq \frac{2}{3} & F^-(p) & = inf\{x \in \mathds{R} : F(x) \geq p\} \\
+\intertext{If $x < 2$, $F(x) \leq \frac{1}{2}$; if $x \geq 2$, $F(x) \geq \frac{2}{3}$}
+&& \Rightarrow & = inf[2, \infty) \\
+&& & = 2 \\
+\frac{2}{3} < p & \leq \frac{3}{4} & F^-(p) & = F^{-1}(p) \quad \text{by prop. 2}\\
+&& p & = \frac{x}{12} - \frac{1}{2} \Rightarrow x = 12(p - \frac{1}{2}) \\
+\frac{3}{4} < p & \leq 1 & F^-(p) & = inf\{x \in \mathds{R} : F(x) \geq p\} \\
+\intertext{If $x < 3$, $F(x) < \frac{3}{4}$; if $x \geq 3$, $F(x) = 1$}
+&& \Rightarrow & = inf[3, \infty) \\
+&& & = 3
+\end{align*}
+
+\begin{equation*}
+F^-(p) = \begin{cases}
+4p & 0 \leq p \leq \frac{1}{4} \\
+1 & \frac{1}{4} < p \leq \frac{1}{2} \\
+2 & \frac{1}{2} < p \leq \frac{2}{3} \\
+12\left(p - \frac{1}{2}\right) & \frac{2}{3} < p \leq \frac{3}{4} \\
+3 & \frac{3}{4} < p \leq 1
+\end{cases}
+\end{equation*}
+
+```{r, echo = FALSE}
+par(family = "serif")
+x <- c(-1,0,0,1,1,2,2,3,3,4)
+y <- c(0,0,0,1/4,1/2,1/2,2/3,3/4,1,1)
+open <- c(0,0,0,1,0,1,0,1,0,0)
+closed <- c(0,0,0,0,1,0,1,0,1,0)
+df <- data.frame(x, y, open, closed)
+n <- dim(df)[1] - 1
+
+plot(df$x, df$y, type = "n", axes = FALSE, ann = FALSE)
+for (i in 1:n) {
+	if (df$x[i] != df$x[i+1]) {
+		lines(df[c(i, i+1), 1:2], col = "violetred")
+	} else {
+		lines(df[c(i, i+1), 1:2], lty = 3, col = "grey50")
+	}
+}
+points(df[df$closed == 1, 1:2], pch = 20)
+points(df[df$open == 1, 1:2], pch = 21, col = "black", bg = "white", cex = (2/3))
+
+axis(1, at = seq.int(-1,4), col = "grey50", lwd = 0, lwd.tick = 1)
+box(lty = 1, col = "grey50")
+axis(2, at = seq.int(0, 1, 0.2), lwd = 0, lwd.tick = 1, col = "grey50")
+title(main = "CDF of Random Variable X", xlab = "x", ylab = "F(x)")
+```
+```{r, echo = FALSE}
+load("ps9p3.RData")
+```
+3. The dataset x has 150 observations which is a reasonably large sample size. Thus, using the kernel density method should give us a good estimate of the uknown distribution of the data. After plotting several estimates using different kernel functions, it is clear that the resulting estimate is not noticeably changed based on the choice of kernel. Therefore, we proceed with the Epanechnikov kernel because it has properties (albeit uknown to us) that make it optimal. After testing several bandwidths in the range [0.01, 0.10], h = 0.05 gives a good idea of the shape and appears to be a reasonable middle group between under and over smoothing. With the finalized kernel density estimate plotted (violet red line in the figure below), the underlying distribution appears to be symmetric, bell-shaped, and centered around 0.50. As a result, the normal distribution is an obvious candidate for the unknown distribution; furthermore, it has the additional desireable property that good parameter estimate can be easily obtained from the data by taking $\hat{\mu} = \bar{x}$ and $\hat{\sigma}^2 = s^2$. With $\bar{x}$ = `r round(mean(x),2)` and $s^2$ = `r round(var(x),2)`, we get the dashed blue line in the plot below. The plot shows that the density of $\text{N}(\bar{x}, s^2)$ follows the kernel density very closely, so we can conclude the model is a good fit.  
+
+    Another distribution that can be symmetric and bell-shaped is the beta distribution. The beta distribution is an appropriate candidate for this dataset because the support of the distribution is the interval [0, 1]. It is not completely clear from the kernel density estimate what the range of the dataset is, but a quick summary call in R gives the data range: [0.054, 0.868]. The beta parameters are not as easily estimated from the data, so we proceed with trial and error to get a close fit. The resulting parameterized beta distribution is plotted in the figure below using a block dotted line. This candidate model is also a very good fit for the unknown distribution.  
+  
+    FINAL CHOICE??  
+
+```{r, echo = FALSE}
+par(family = "serif")
+m <- mean(x)
+s <- sd(x)
+
+h <- 0.05
+krn <- "epanechnikov"
+d <- density(x, kernel = krn, bw = h, from = -0.5, to = 1.5)
+
+y.up <- ceiling(max(d$y)) + 1
+plot(d$x, d$y, axes = FALSE, ann = FALSE, ylim = c(0, y.up), type = "n")
+lines(d, col = "violetred")
+axis(1, at = seq.int(-0.5, 1.5, 0.5), col = "grey50")
+axis(2, at = seq.int(0, y.up, 0.5), col = "grey50")
+
+curve(dnorm(x, mean = m, sd = s), from = -0.5, to = 1.5, col = "slateblue2", lty = 2, add = TRUE)
+curve(dbeta(x, shape1 = 7.5, shape2 = 6.5), from = 0, to = 1, col = "black", lty = 3, add = TRUE)
+
+legend("topleft", inset = 0.05, 
+	legend = c(paste("KDE: ", krn, "(h = ", h, ")", sep = ""), 
+		paste("N(", round(m,3),", ",round(s^2,3),")", sep = ""),
+		paste("Beta(7.5, 6.5)")
+	), 
+	bty = "n", col = c("violetred", "slateblue2", "black"), 
+	lty = c(1,2,3), 
+	lwd = 1)
+title(xlab = "x", ylab = "Density")
+```

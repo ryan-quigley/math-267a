@@ -8,7 +8,8 @@
 
 load("ps10p1.RData")
 
-# a) it is given in the problem that the variance is known, sigma = sqrt(5)
+# a) 
+# It is given in the problem that the variance is known: sigma = sqrt(5)
 # samples - rows
 # values in each sample - cols
 
@@ -16,14 +17,13 @@ load("ps10p1.RData")
 alpha <- 0.05
 m <- 100
 n <- 30
-sigma2 <- 5
+sigma2 <- 25
 
 # CI
 width <- qnorm(p = (1 - alpha/2))*sqrt(sigma2/n)
 x.bar <- rowMeans(normal)
 ci.bounds <- cbind(x.bar - width, x.bar + width)
 
-par(mfrow = c(1,2))
 
 # Plot
 plot(1, 10, axes = FALSE, ann = FALSE, 
@@ -43,9 +43,7 @@ for (i in 1:m) {
 lines(rep(10, 2), c(0, 110), col = "gray50", lwd = 1.5, lty = 3)
 axis(1, labels = FALSE, tick = TRUE, lwd = 1.5, lwd.tick = 0, col = "gray50", pos = 0)
 axis(1, at = 10, labels = 10, lwd = 0, lwd.tick = 1.5, col = "gray50", pos = 0)
-
-cat(ci.fail,"/100 fail to capture the true mean", sep = "")
-cat("Length of interval: ", 2*width)
+title(main = "95% Confidence Intervals (100 samples)", sub = paste(ci.fail,"/100 fail to capture true mean", sep = ""), line = 2)
 
 
 
@@ -53,7 +51,7 @@ cat("Length of interval: ", 2*width)
 alpha <- 0.20
 m <- 100
 n <- 30
-sigma2 <- 5
+sigma2 <- 25
 
 # CI
 width <- qnorm(p = (1 - alpha/2))*sqrt(sigma2/n)
@@ -78,22 +76,22 @@ for (i in 1:m) {
 lines(rep(10, 2), c(0, 110), col = "gray50", lwd = 1.5, lty = 3)
 axis(1, labels = FALSE, tick = TRUE, lwd = 1.5, lwd.tick = 0, col = "gray50", pos = 0)
 axis(1, at = 10, labels = 10, lwd = 0, lwd.tick = 1.5, col = "gray50", pos = 0)
+title(main = "80% Confidence Intervals (100 samples)", sub = paste(ci.fail,"/100 fail to capture true mean", sep = ""), line = 2)
 
-cat(ci.fail,"/100 fail to capture the true mean", sep = "")
-cat("Length of interval: ", 2*width)
 
 # c)
-p <- 0.05
-p*n # condition for Wald interval is NOT met, thus the normal approximation is not appropriate
-(1-p)*n
 
-library(binom)
+p <- 0.05
+# Condition for Wald interval is NOT met, thus the normal approximation is not appropriate
+wald.c.1 <- p*n 
+wald.c.2 <- (1-p)*n
 
 num.success <- rowSums(bernoulli)
-ci.wald <- binom.confint(num.success, n, conf.level = 0.95, methods = "asymptotic")
-ci.wilson <- binom.confint(num.success, n, conf.level = 0.95, methods = "wilson")
+ci.wald <- binom::binom.confint(num.success, n, conf.level = 0.95, methods = "asymptotic")
+ci.wilson <- binom::binom.confint(num.success, n, conf.level = 0.95, methods = "wilson")
 
-par(mfrow = c(1,2))
+margins <- par("mar")
+par(mfrow = c(1,2), mar = margins + c(0,-3,0,-1))
 # Plot: wald
 plot(0.05, 10, axes = FALSE, ann = FALSE, 
 	xlim = c(-0.05, 0.3),
@@ -118,9 +116,8 @@ for (i in 1:m) {
 }
 axis(1, labels = FALSE, tick = TRUE, lwd = 1.5, lwd.tick = 0, col = "gray50", pos = 0)
 axis(1, at = c(0, 0.05), labels = c(0, 0.05), lwd = 0, lwd.tick = 1.5, col = "gray50", pos = 0)
+title(main = "95% Wald Intervals (100 samples)", sub = paste(ci.fail + ci.zero,"% fail to capture true proportion", sep = ""), line = 2)
 
-cat(ci.fail," non-zero intervals fail to capture the true proportion", sep = "")
-cat(ci.zero," intervals could not be calculated", sep = "")
 
 # Plot: wilson
 plot(0.05, 10, axes = FALSE, ann = FALSE, 
@@ -141,6 +138,4 @@ for (i in 1:m) {
 }
 axis(1, labels = FALSE, tick = TRUE, lwd = 1.5, lwd.tick = 0, col = "gray50", pos = 0)
 axis(1, at = c(0, 0.05), labels = c(0, 0.05), lwd = 0, lwd.tick = 1.5, col = "gray50", pos = 0)
-
-cat(ci.fail,"/100 Wilson intervals fail to capture the true proportion", sep = "")
-
+title(main = "95% Score Intervals (100 samples)", sub = paste(ci.fail,"% fail to capture true proportion", sep = ""), line = 2)

@@ -207,11 +207,11 @@ a) The null hypothesis: the previous survey results are still accurate and relev
     \end{align*}
     
     Thus, our rejection region is $\bar{X} \geq 141.83$. In terms of quantiles, this correpondes to $t > \frac{141.83 - 140}{14.44/\sqrt{20}} = 0.57$  
-b) In order to justify performing a t-test, we must assume the underlying population is normally distributed, and we have no reason to believe this assumption is violated. The `t.test()` gives a $t$ value of 1.97, which is significantly larger than our critical value, 0.57. Thus, we reject the null hypothesis and conclude that the average weight of loaded logging cars is greater than 140.  
+b) In order to justify performing a t-test, we must assume the underlying population is normally distributed. Assuming that is the case, the t-test is appropriate because we do not know the population standard deviation and our sample size is not large enough to justify a large-sample asymptotic test. The `t.test()` gives a $t$ value of 1.97, which is significantly larger than our critical value, 0.57. Thus, we reject the null hypothesis and conclude that the average weight of loaded logging cars is greater than 140.  
 
     ```{r, echo = FALSE}
     load("ps10p3.RData")
     t.test(x = trains, mu = 140, alternative = "greater")
     ```
 c) The t-test from part (b) only allows us to advise the engineers to build the trestle to higher tolerance; however, it does not allow us to suggest a minimum threshold for the tolerance. We would need to construct a confidence interval in order to provide the engineers with suggested tolerance minimums.  
-d) In light of the new information, the results of the initial t-test are invalid. The data is not a random sample from the population of logging cars, so it is not an appropriate sample to use to test the average weight, $\mu$, of logging cars...
+d) In light of the new information, the results of the initial t-test are invalid. The data is not a random sample from the population of logging cars, so it is not an appropriate sample to use to test the average weight of logging cars, $\mu$.

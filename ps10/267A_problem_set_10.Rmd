@@ -19,7 +19,7 @@ Problem Set 10
 load("ps10p1.RData")
 ```
 1.
-a) 4/100 intervals fail to capture the true mean. This is not surprising because sampling variation can cause the coverage of the confidence interval to differ slightly from 95% exactly. If we draw an infinite number of samples of the same size and calculate a confidence interval for each sample, the coverage of the intervals would be 95%; in other words, in the limit we expect the coverage of the intervals to approach 95%.  
+a) 4/100 intervals fail to capture the true mean. This is not surprising because sampling variation can cause the coverage of the confidence interval to differ slightly from 95% exactly. If we draw an infinite number of samples of the same size from the same population and calculate a confidence interval for each sample, the coverage of the intervals would be 95%; in other words, in the limit we expect the coverage of the intervals to approach 95%.  
 
     ```{r, echo = FALSE, fig.align = "center"}
     alpha <- 0.05
@@ -159,7 +159,7 @@ c) It is worth noting that one of the conditions for normal approximation is not
 
 2.
 a) No discussion required  
-b) The 98% confidence interval for the average time between events, $1/\lambda$, is (5.44, 39.94)  
+b) The 98% confidence interval for the average time between events, $1/\lambda$, is (6.33, 28.78)  
 c) In order to guarantee that the confidence interval contains the true value for the average time between events, the interval must be the entire support of the distribution: the support of the $\chi^2$ distribution is $[0, \infty)$  
 
     ```{r, echo = FALSE}
@@ -207,7 +207,7 @@ a) The null hypothesis: the previous survey results are still accurate and relev
     \end{align*}
     
     Thus, our rejection region is $\bar{X} \geq 141.83$. In terms of quantiles, this correpondes to $t > \frac{141.83 - 140}{14.44/\sqrt{20}} = 0.57$  
-b) The `t.test()` gives a $t$ value of 1.97, which is significantly larger than our critical value, 0.57. Thus, we reject the null hypothesis and conclude that the average weight of loaded logging cars is greater than 140.  
+b) In order to justify performing a t-test, we must assume the underlying population is normally distributed, and we have no reason to believe this assumption is violated. The `t.test()` gives a $t$ value of 1.97, which is significantly larger than our critical value, 0.57. Thus, we reject the null hypothesis and conclude that the average weight of loaded logging cars is greater than 140.  
 
     ```{r, echo = FALSE}
     load("ps10p3.RData")

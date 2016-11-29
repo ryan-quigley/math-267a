@@ -1,9 +1,10 @@
 ---
-output: pdf_document
-header-includes:
-   - \usepackage{dsfont}
 fontsize: 12pt
 geometry: margin=0.75in
+header-includes: \usepackage{dsfont}
+output:
+  pdf_document: default
+  word_document: default
 ---
 \begin{flushright}
 Navid Morshed, Han Xu, Ryan Quigley \\

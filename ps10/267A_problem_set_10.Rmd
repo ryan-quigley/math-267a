@@ -215,4 +215,10 @@ b) In order to justify performing a t-test, we must assume the underlying popula
     t.test(x = trains, mu = 140, alternative = "greater")
     ```
 c) The t-test from part (b) only allows us to advise the engineers to build the trestle to higher tolerance; however, it does not allow us to suggest a minimum threshold for the tolerance. We would need to construct a confidence interval in order to provide the engineers with suggested tolerance minimums.  
-d) In light of the new information, the results of the initial t-test are invalid. The data is not a random sample from the population of logging cars, so it is not an appropriate sample to use to test the average weight of logging cars, $\mu$.
+d) In light of the new information, the results of the initial t-test are invalid. The data is not a random sample from the population of logging cars, so it is not an appropriate sample to use to test the average weight of logging cars, $\mu$.  
+
+		There are a lot of unknown factors here. For example we don't have any knowledge of the cost factor here. If the two bridges cost the same then built the strong one regardless of what our hypothesis test suggests. Our data is 10 years old and it’s from a single year, is this data valuable today. Will assumptions based on this data set be valuable in twenty years? Have the car weights changed over the past years? How will they change in the feature? How has the climate changed over the last ten years? These are the questions that will affect our decision.  
+
+		So our assumptions for part D is based on the fact that there is a significant difference between the prices of two bridges and that the weight of the cars, weight of the delivery product (if any) and the capacity the cars will stay the same for a long time. The climate has remained the same for the past 10 years and will continue to do so for a long time.  
+
+		According to the new information our data in no longer random since the cars were handpicked. So our result from the previous section is no longer valid. Our first natural approach should be to collect more data. If collecting more data is absolutely impossible and we are forced to work with this non random and out data then we can assume a larger critical value and adjust our calculations.
